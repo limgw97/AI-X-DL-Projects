@@ -49,7 +49,7 @@
 | 모델 선택 | Grid Search, Cross Validation | 성능 최적화 |
 | 클러스터링 (선택) | k-Means, HDBSCAN | 이상 상태 정의 전 탐색용 |
 
-> 📌 회귀(Regression)는 본 프로젝트에 부적합 (분류 과제이므로)
+> 📌 회귀(Regression)는 본 프로젝트에 부적합하므로 제외하였습니다. (분류 과제이므로)
 
 ---
 
@@ -81,32 +81,39 @@
 
 ## 4. 특성 추출 및 모델링
 
-### 4.1 특징 추출
+### 4.1 특징 추출 및 사용 데이터셋
 
-- **Mel-Spectrogram**: 2D 이미지 입력으로 CNN에 적합
-- **MFCC**: 벡터형 입력으로 전통 모델에 적합
-- **딥러닝 임베딩**:
-  - VGGish (Google)
-  - Autoencoder 기반 압축
+- MIMII Dataset 중 fan 데이터를 활용
+- **Mel-Spectrogram**: 2D 이미지 형태로 변환하여 모델에 입력
+- Sampling rate: 16,000Hz, Mel-bins: 64로 설정
 
-### 4.2 분류 모델
+### 4.2 최종 분류 모델 (CRNN)
 
-- **CNN**: 주파수-시간 이미지 인식
-- **RNN / LSTM**: 시계열 패턴 분석
-- **VAE**: 재구성 오류 기반 이상 탐지
+본 프로젝트에서는 CRNN(Convolutional Recurrent Neural Network)을 사용했습니다.
 
-### 입력 → 처리 흐름 예시
+- CNN 층에서 주파수 패턴 특징을 추출
+- LSTM 층을 통해 시간적 변화와 특징을 추가로 고려
+- 최종 Dense 레이어를 통해 정상과 이상 상태를 분류
 
-| 입력 데이터 | 특징 추출 | 분류 모델 |
-|-------------|------------|-----------|
-| 오디오 (.wav) | MFCC / Mel-Spectrogram | CNN, LSTM, CNN-LSTM |
-| 오디오 (.wav) | VGGish embedding | MLP, Autoencoder |
+### 4.3 학습 과정
 
-### 4.3 향후 모델 개선
+- Loss: CrossEntropyLoss
+- Optimizer: Adam (learning rate=0.001)
+- Epoch: 30회 수행  
+  - Loss가 초기 약 98에서 최종적으로 약 3 수준으로 감소  
+  - 과적합(Overfitting) 징후 없이 안정적인 수렴 확인
 
-- Transformer, Attention 기반 구조 도입
-- CNN + LSTM 앙상블
-- 모델 경량화 및 실시간 적용 검토
+### 4.4 평가 및 예측
+
+- 학습 후 개별 오디오 파일 또는 폴더 내 모든 오디오 파일 예측 가능
+- 예측 결과로 정상과 이상 비율 출력 코드 제공
+- 폴더 기반 일괄 예측 코드 작성하여 실제 산업 현장 적용 가능성 평가
+
+### 4.5 향후 개선 방향
+
+- Transformer, Attention 기반 모델로의 확장 가능성 탐색
+- 모델 경량화 및 모바일/엣지 디바이스 적용 가능성 고려
+- 데이터 증강과 정교한 하이퍼파라미터 튜닝을 통한 성능 추가 향상
 
 ---
 
@@ -116,4 +123,3 @@
 - 공개 데이터셋: MIMII, CWRU 등
 - Python 라이브러리: Librosa, Scipy, PyTorch
 
----
