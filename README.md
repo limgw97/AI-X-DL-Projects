@@ -103,13 +103,39 @@
   - Loss가 초기 약 98에서 최종적으로 약 3 수준으로 감소  
   - 과적합(Overfitting) 징후 없이 안정적인 수렴 확인
 
-### 4.4 평가 및 예측
+---
 
-- 학습 후 개별 오디오 파일 또는 폴더 내 모든 오디오 파일 예측 가능
-- 예측 결과로 정상과 이상 비율 출력 코드 제공
-- 폴더 기반 일괄 예측 코드 작성하여 실제 산업 현장 적용 가능성 평가
+## 4.4 모델 성능 평가 (추가 테스트)
 
-### 4.5 향후 개선 방향
+Kaggle의 [Anomaly Detection from Sound Data (Fan)](https://www.kaggle.com/datasets/vuppalaadithyasairam/anomaly-detection-from-sound-data-fan?resource=download)의 **Train Set**을 별도의 테스트 데이터로 사용하여 성능을 평가했습니다.
+
+- 평가 데이터 총 개수: **6,521개**
+- 평가 결과:
+  - 정상: **4,889개 (75.0%)**
+  - 이상: **1,632개 (25.0%)**
+
+다음 이미지는 실제 평가 후 출력된 결과입니다:
+![evaluation_result](evaluation_result.png)
+
+---
+
+## 4.5 학습 과정에서의 손실(loss) 감소 추이
+
+다음 이미지는 실제 학습 과정 중 기록된 손실(loss) 값의 변화입니다:
+![epoch_loss](epoch_loss.png)
+
+---
+
+## 4.6 정확도가 기대보다 낮은 이유 분석
+
+- 학습 데이터 양 부족 및 불균형 문제
+- Mel-Spectrogram 외 추가적 특징 미활용
+- 모델 구조 및 복잡도 한계
+- 하이퍼파라미터 최적화 부족
+
+---
+
+## 4.7 향후 개선 방향
 
 - Transformer, Attention 기반 모델로의 확장 가능성 탐색
 - 모델 경량화 및 모바일/엣지 디바이스 적용 가능성 고려
@@ -117,9 +143,21 @@
 
 ---
 
-## 🔗 참고자료
+## 5. 참고자료
 
 - Amazon Lookout for Equipment: [공식 블로그](https://aws.amazon.com/ko/blogs/korea/acoustic-anomaly-detection-using-amazon-lookout-for-equipment/)
 - 공개 데이터셋: MIMII, CWRU 등
 - Python 라이브러리: Librosa, Scipy, PyTorch
 
+---
+
+## 6. 결론
+
+본 프로젝트에서는 CRNN 모델을 이용하여 기계 장비의 음향 데이터로 이상 상태를 분류하는 시스템을 구축하고 테스트를 진행했습니다. 비록 4.6에서 설명한 몇가지 요인 등으로 인해 정확도가 다소 하락하였지만 향후 추가적인 데이터 확보, 특징 추출의 다양화 및 고급 모델링 기법을 도입하여 정확도를 개선할 계획입니다.
+
+---
+
+## 🧑‍💻 역할 분담
+
+- **멤버 1 임규원**: 코드 구현 및 데이터 처리
+- **멤버 2 이재룡**: 자료 조사, 보고서 작성 및 동영상 녹화
