@@ -126,6 +126,8 @@ Kaggle의 [Anomaly Detection from Sound Data (Fan)](https://www.kaggle.com/datas
 
 ![epoch_loss](images/epoch_loss.png)
 
+epoch 26에서 일시적으로 손실값이 진동했지만 전체적인 추세는 수렴적이며 안정적으로 감소하고 있다고 볼 수 있습니다.
+
 ---
 
 ## 4.6 정확도가 기대보다 낮은 이유 분석
