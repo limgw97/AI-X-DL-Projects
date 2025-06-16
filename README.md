@@ -115,7 +115,7 @@ Kaggle의 [Anomaly Detection from Sound Data (Fan)](https://www.kaggle.com/datas
   - 이상: **1,632개 (25.0%)**
 
 다음 이미지는 실제 평가 후 출력된 결과입니다:
-![evaluation_result](evaluation_result.png)
+![evaluation_result](images/evaluation_result.png)
 
 ---
 
