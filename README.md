@@ -123,7 +123,8 @@ Kaggle의 [Anomaly Detection from Sound Data (Fan)](https://www.kaggle.com/datas
 ## 4.5 학습 과정에서의 손실(loss) 감소 추이
 
 다음 이미지는 실제 학습 과정 중 기록된 손실(loss) 값의 변화입니다:
-![epoch_loss](epoch_loss.png)
+
+![epoch_loss](images/epoch_loss.png)
 
 ---
 
